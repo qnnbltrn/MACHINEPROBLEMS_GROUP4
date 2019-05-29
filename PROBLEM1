@@ -1,0 +1,146 @@
+#include <iostream>
+#include <conio.h>
+#include <cstring>
+
+using namespace std;
+
+int main()
+{
+    // declaration of variables 
+    double grade1[50], grade2[50], grade3[50], grade4[50], finalg[50], quiz[50], act[50], prelime[50], finale[50], gpa[50];
+	int n, a, b, c, d, i, j, k;
+    string name[50], grd[50], l;
+    
+    n = 0;
+    a = 0;
+    b = 0;
+    c = 0;
+    d = 0;
+    
+    //loop to repeat input 50 times 
+    do{
+        cout << "Name: "; //input of name
+        cin >> name[n]; 
+        cout << "\nRespective grade components for: " << endl; 
+        cout << "Quizzes(all over 450 points): "; // input of scores in quizzes
+        cin >> quiz[n];
+        cout << "Activities(all over 1,350 points): "; // input of scores in activities
+        cin >> act[n];
+        cout << "Major Examinations: " << endl;
+        cout << "Preliminary Examination(all over 100 points): "; // input of scores in prelims
+        cin >> prelime[n];
+        cout << "Final Examination(all over 100 points): "; // input of scores in finals
+        cin >> finale[n];
+        cout << endl;
+        
+        n++;
+    }
+    while (n < 50);
+    
+    for(; a < 50; a++)
+    {
+        // formulas to compute for raw grades
+    	grade1[a] = ((quiz[a] / 450) * 100) * 0.3; // formula to compute for quizzes
+    	grade2[a] = ((act[a] / 1350) * 100) * 0.15; // formula to compute for activities
+    	grade3[a] = prelime[a] * 0.25; // formula to compute for prelims
+    	grade4[a] = finale[a] * 0.3; // formula to compute for finals
+    	finalg[a] = grade1[a] + grade2[a] + grade3[a] + grade4[a]; // computed raw grade
+	}
+    
+    do{
+        // loop for assigning GPA
+    	if (finalg[b] < 60)
+    	{
+    		gpa[b] = 5.00;
+    		grd[b] = "failed";
+		}
+		else if (finalg[b] >= 60 && finalg[b] <= 64.44)
+		{
+			gpa[b] = 3.00;
+			grd[b] = "passed";
+		}
+		else if (finalg[b] >= 64.45 && finalg[b] <= 68.89)
+		{
+			gpa[b] = 2.75;
+			grd[b] = "passed";
+		}
+		else if (finalg[b] >= 68.90 && finalg[b] <= 73.33)
+		{
+			gpa[b] = 2.50;
+			grd[b] = "passed";
+		}
+		else if (finalg[b] >= 73.34 && finalg[b] <= 77.78)
+		{
+			gpa[b] = 2.25;
+			grd[b] = "passed";
+		}
+		else if (finalg[b] >= 77.79 && finalg[b] <= 82.22)
+		{
+			gpa[b] = 2.00;
+			grd[b] = "passed";
+		}
+		else if (finalg[b] >= 82.23 && finalg[b] <= 86.67)
+		{
+			gpa[b] = 1.75;
+			grd[b] = "passed";
+		}
+		else if (finalg[b] >= 86.68 && finalg[b] <= 91.11)
+		{
+			gpa[b] = 1.50;
+			grd[b] = "passed";
+		}
+		else if (finalg[b] >= 91.12 && finalg[b] <= 95.56)
+		{
+			gpa[b] = 1.25;
+			grd[b] = "passed";
+		}
+		else if (finalg[b] > 95.56)
+		{
+			gpa[b] = 1.00;
+			grd[b] = "passed";
+		}
+		
+		b++;
+	} 
+	while (b < 50);
+	
+	//loop for outputs needed 
+	do{ 
+		cout << "Name: " << name[c]; // output of student name 
+		cout << "\nYour raw grade is: " << finalg[c] << endl; // output of raw grade 
+		cout << "Your transmuted grade is: " << gpa[c] << endl; // output of transmuted grade
+		cout << "You have " << grd[c] << "." << endl; // output of final grade 
+		
+		c++;
+	}
+	while (c < 50);
+	
+	// selection sort for sorting the values from highest to lowest
+	for(i = 0; i < 50; i++)
+	{
+		for(j = i + 1; j < 50; j++)
+		{
+			if(finalg[i] < finalg[j])
+			{
+				k = finalg[i];
+				finalg[i] = finalg[j];
+				finalg[j] = k;
+				
+				l = name[i];
+				name[i] = name[j];
+				name[j] = l;
+			}
+		}
+	}
+	
+	//loop for outputing the top ten performing students
+	cout << "\n\nThe top ten performing students in class are: " << endl;
+	
+	for(i = 0; i < 10; i++)
+	{
+		cout << name[i] << " with a GPA of " << finalg[i] << "." << endl;
+	}
+	
+	_getch();
+	return 0;
+}
