@@ -1,0 +1,65 @@
+#include<iostream>
+#include<conio.h>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+int main()
+{
+	int angA, angB, angC, ax, ay, bx, by, cx, cy;
+	double a, b, c, per, p, area, apo, d, xcirc, ycirc;
+
+	cout << "Enter the measurements of the sides of triangle.\n";
+	cout << "Side A: ";
+	cin >> a;
+	cout << "Side B: ";
+	cin >> b;
+	cout << "Side C: ";
+	cin >> c;
+
+	/*Law of Cos: c^2 = a^2+b^2-2ac cosC*/
+	angA = ((acos((pow(b, 2) + pow(c, 2) - pow(a, 2)) / (2 * b * c)) * 180) / 3.14);
+	angB = ((acos((pow(a, 2) + pow(c, 2) - pow(b, 2)) / (2 * a * c)) * 180) / 3.14);
+	angC = ((acos((pow(a, 2) + pow(b, 2) - pow(c, 2)) / (2 * b * a)) * 180) / 3.14);
+/*The results are in radians. Radians to degrees = rad*180/pi*/
+
+	cout << "\n\nInterior Angles:\n";
+	cout << "Angle A = " << angA << " degrees." << endl;
+	cout << "Angle B = " << angB << " degrees." << endl;
+	cout << "Angle C = " << angC << " degrees." << endl;
+
+	if (angA == angB || angA == angC || angC == angB)/*Isosceles-two sides are equal*/
+		cout << "\nThe triangle is isosceles.";
+	else if (angA == angB && angA == angC && angB == angC)/*Equilateral-all sides are equal*/
+		cout << "\nThe triangle is equilateral.";
+	else  /*Scalene-no sides are equal*/
+		cout << "\nThe triangle is scalene.";
+
+	per = (a + b + c);
+	p = per / 2;
+	area = sqrt((p) * (p - a) * (p - b) * (p - c));/*Heron's Formula*/
+	cout << "\n\nThe area of the triangle is " << setprecision(3)<<fixed<< area << " and the perimeter is " << per << ".";
+
+	if (angA == 90 || angB == 90 || angC == 90)/*right triangle - one angle=90*/
+		cout << "\n\nIt is a right triangle.";
+	else if (angA > 90 || angB > 90 || angC > 90)/*obtuse- one angle>90*/
+		cout << "\n\nIt is an obtuse triangle.";
+	else if (angA < 90 && angB < 90 && angC < 90)/*acute- all angles<90*/
+		cout << "\n\nIt is an acute triangle.";
+
+	apo = (2 * area) / per;
+	cout << "\n\nThe length of the apothem is " << setprecision(3)<<fixed<<apo << ".";
+
+	cout << "\n\nEnter the coordinates of the vertices.\n";
+	cout << "Point A: ";
+	cin >> ax >> ay;
+	cout << "Point B: ";
+	cin >> bx >> by;
+	cout << "Point C: ";
+	cin >> cx >> cy;
+	d = 2 * ((ax * (by - cy)) + (bx * (cy - ay)) + (cx * (ay - by)));
+	xcirc = (1 / d) * (((pow(ax, 2) + pow(ay, 2)) * (by - cy)) + ((pow(bx, 2) + pow(by, 2)) * (cy - ay)) + ((pow(cx, 2) + pow(cy, 2)) * (ay - by)));
+	ycirc = (1 / d) * (((pow(ax, 2) + pow(ay, 2)) * (cx - bx)) + ((pow(bx, 2) + pow(by, 2)) * (ax - cx)) + ((pow(cx, 2) + pow(cy, 2)) * (bx - ax)));
+	cout << "The circumcenter of the triangle is in the point (" << setprecision(2)<<fixed<<xcirc<< "," << setprecision(2) << fixed <<ycirc << ").";
+	_getch();
+	return 0;
+}
